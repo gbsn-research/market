@@ -15,6 +15,7 @@ import {
 import { OrdersData_orders as OrdersData } from '../@types/subgraph/OrdersData'
 import { UserSalesQuery as UsersSalesList } from '../@types/subgraph/UserSalesQuery'
 import { OpcFeesQuery as OpcFeesData } from '../@types/subgraph/OpcFeesQuery'
+import { UserSalesQuery_users as UserSales } from 'src/@types/subgraph/UserSalesQuery'
 import { calcSingleOutGivenPoolIn } from './pool'
 import Decimal from 'decimal.js'
 import { MAX_DECIMALS } from './constants'
@@ -423,8 +424,8 @@ export async function getUserSales(
 export async function getTopAssetsPublishers(
   chainIds: number[],
   nrItems = 9
-): Promise<AccountTeaserVM[]> {
-  const publishers: AccountTeaserVM[] = []
+): Promise<UserSales[]> {
+  const publishers: UserSales[] = []
 
   const result = await getTopPublishers(chainIds, null)
   const { topPublishers } = result.aggregations
