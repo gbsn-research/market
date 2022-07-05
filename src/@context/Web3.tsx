@@ -13,7 +13,7 @@ import { infuraProjectId as infuraId } from '../../app.config'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import { LoggerInstance } from '@oceanprotocol/lib'
 import { isBrowser } from '@utils/index'
-import { getEnsAvatar, getEnsName, getEnsProfile } from '@utils/ens'
+import { getEnsAvatar, getEnsName } from '@utils/ens'
 import { getOceanBalance } from '@utils/ocean'
 import useNetworkMetadata, {
   getNetworkDataById,
@@ -25,6 +25,7 @@ import { useMarketMetadata } from './MarketMetadata'
 
 interface Web3ProviderValue {
   web3: Web3
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   web3Provider: any
   web3Modal: Web3Modal
   web3ProviderInfo: IProviderInfo
@@ -52,8 +53,6 @@ const web3ModalTheme = {
   hover: 'var(--background-highlight)'
 }
 
-// HEADS UP! We inline-require some packages so the SSR build does not break.
-// We only need them client-side.
 const providerOptions = isBrowser
   ? {
       walletconnect: {
@@ -66,16 +65,6 @@ const providerOptions = isBrowser
           }
         }
       }
-      // torus: {
-      //   package: require('@toruslabs/torus-embed')
-      //   // options: {
-      //   //   networkParams: {
-      //   //     host: oceanConfig.url, // optional
-      //   //     chainId: 1337, // optional
-      //   //     networkId: 1337 // optional
-      //   //   }
-      //   // }
-      // }
     }
   : {}
 
@@ -94,6 +83,7 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
   const { appConfig } = useMarketMetadata()
 
   const [web3, setWeb3] = useState<Web3>()
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [web3Provider, setWeb3Provider] = useState<any>()
   const [web3Modal, setWeb3Modal] = useState<Web3Modal>()
   const [web3ProviderInfo, setWeb3ProviderInfo] = useState<IProviderInfo>()
@@ -305,9 +295,11 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
   // Logout helper
   // -----------------------------------
   async function logout() {
-    if (web3 && web3.currentProvider && (web3.currentProvider as any).close) {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    if ((web3?.currentProvider as any)?.close) {
       await (web3.currentProvider as any).close()
     }
+    /* eslint-enable @typescript-eslint/no-explicit-any */
     await web3Modal.clearCachedProvider()
   }
   // -----------------------------------
@@ -356,6 +348,7 @@ function Web3Provider({ children }: { children: ReactNode }): ReactElement {
       web3Provider.removeListener('networkChanged', handleNetworkChanged)
       web3Provider.removeListener('accountsChanged', handleAccountsChanged)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [web3Provider, web3])
 
   return (
