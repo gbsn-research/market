@@ -17,6 +17,7 @@ export default function MarketStatsTotal({
       </p>
       <Conversion
         price={`${total.totalValueLockedInOcean}`}
+        priceTokenId="ocean-protocol"
         hideApproximateSymbol
       />{' '}
       <abbr title="Total Value Locked">TVL</abbr> across{' '}

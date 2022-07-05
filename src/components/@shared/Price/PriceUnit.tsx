@@ -31,6 +31,9 @@ export default function PriceUnit({
 }): ReactElement {
   const { locale } = useUserPreferences()
 
+  const priceTokenId =
+    symbol === 'OCEAN' || symbol === 'mOCEAN' ? 'ocean-protocol' : symbol
+
   return (
     <div className={`${styles.price} ${styles[size]} ${className}`}>
       {type && type === 'free' ? (
@@ -44,7 +47,9 @@ export default function PriceUnit({
               <Badge label="pool" className={styles.badge} />
             )}
           </div>
-          {conversion && <Conversion price={price} />}
+          {conversion && (
+            <Conversion price={price} priceTokenId={priceTokenId} />
+          )}
         </>
       )}
     </div>

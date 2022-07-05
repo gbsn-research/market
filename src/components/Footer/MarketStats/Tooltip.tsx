@@ -27,6 +27,7 @@ export default function MarketStatsTooltip({
             <br />
             <Conversion
               price={totalValueLockedInOcean?.[chainId] || '0'}
+              priceTokenId="ocean-protocol"
               hideApproximateSymbol
             />{' '}
             <abbr title="Total Value Locked">TVL</abbr>

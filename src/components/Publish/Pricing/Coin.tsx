@@ -47,7 +47,7 @@ export default function Coin({
           {...field}
         />
         {datatokenOptions?.symbol === 'OCEAN' && (
-          <Conversion price={field.value} />
+          <Conversion price={field.value} priceTokenId="ocean-protocol" />
         )}
         <div>
           <Error meta={meta} />

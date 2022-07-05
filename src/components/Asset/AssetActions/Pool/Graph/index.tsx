@@ -50,7 +50,8 @@ export default function Graph(): ReactElement {
     })
 
     const tvlHistory = poolSnapshots.map((item) => {
-      const conversionSpotPrice = prices[currency.toLowerCase()]
+      const conversionSpotPrice =
+        prices['ocean-protocol'][currency.toLowerCase()]
 
       const tvl = new Decimal(item.baseTokenLiquidity)
         .mul(conversionSpotPrice) // convert to user currency

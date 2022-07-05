@@ -90,11 +90,23 @@ export default function Stats({
     <div className={styles.stats}>
       <NumberUnit
         label="Liquidity in Own Assets"
-        value={<Conversion price={publisherTvl} hideApproximateSymbol />}
+        value={
+          <Conversion
+            price={publisherTvl}
+            priceTokenId="ocean-protocol"
+            hideApproximateSymbol
+          />
+        }
       />
       <NumberUnit
         label="Liquidity"
-        value={<Conversion price={totalTvl} hideApproximateSymbol />}
+        value={
+          <Conversion
+            price={totalTvl}
+            priceTokenId="ocean-protocol"
+            hideApproximateSymbol
+          />
+        }
       />
       <NumberUnit label={`Sale${sales === 1 ? '' : 's'}`} value={sales} />
       <NumberUnit label="Published" value={assetsTotal} />

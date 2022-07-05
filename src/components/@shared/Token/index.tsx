@@ -28,7 +28,13 @@ export default function Token({
         <PriceUnit price={balance} symbol={symbol} size={size} />
       </div>
       {conversion && (
-        <Conversion price={balance} className={`${styles.conversion}`} />
+        <Conversion
+          price={balance}
+          priceTokenId={
+            symbol === ('OCEAN' || 'mOCEAN') ? 'ocean-protocol' : symbol
+          }
+          className={`${styles.conversion}`}
+        />
       )}
     </>
   )

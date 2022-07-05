@@ -41,6 +41,7 @@ export function Liquidity({
     <div className={styles.userLiquidity}>
       <Conversion
         price={liquidity}
+        priceTokenId="ocean-protocol"
         className={styles.totalLiquidity}
         hideApproximateSymbol
       />
